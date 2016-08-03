@@ -383,11 +383,12 @@ void gem::supervisor::GEMSupervisor::updateRunNumber()
   // hacky time for teststand/local runs, before connection through RCMS to RunInfoDB is established
   p_gemDBHelper->configure();
 
-  if (p_gemDBHelper->connect("ldqm_db")) {
+  if (p_gemDBHelper->connect("ldqm_test_db")) {
     // get these from or send them to the readout application
     std::string    setup = "teststand";
     std::string   period = "2016T";
-    std::string location = "TIF";
+    std::string location = "CERN904";
+    
 
     std::string lastRunNumberQuery = "SELECT Number FROM ldqm_db_run WHERE Station LIKE '";
     lastRunNumberQuery += location;
