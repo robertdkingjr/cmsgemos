@@ -12,9 +12,11 @@ RUN_LOCATION = "CERN904"
 
 
 def configure_db():
-    amc_list=[1,2,3,4,5,6,7,8,9,10,11,12]
+    # amc_list=[1,2,3,4,5,6,7,8,9,10,11,12]
+    amc_list=[10]
     geb_list=[[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],]
     zlist = zip(amc_list, geb_list)
+    a_list = []
     for amcN, gtx_list in zlist:
       print "Trying to connect to AMC # %s\n" %(amcN)
       m_AMCmanager = AMCmanager()
@@ -22,11 +24,16 @@ def configure_db():
       try:
         m_AMCmanager.connect(int(amcN))
       except ValueError as ve:
+        print "AMC unaccessible, Value Error reported"
         continue
       # retrieve VFAT slot numberd and ChipIDs from HW
       for gtx in gtx_list:
         if m_AMCmanager.checkGTX(gtx):  
-          chipids = m_AMCmanager.getVFATs(gtx)
+          try:
+            chipids = m_AMCmanager.getVFATs(gtx)
+          except TypeError as te:
+            print "VFATS unaccessible, Type Error reported"
+            continue
           # retrieve VFAT slot numberd and ChipIDs from DB
           vfats = VFAT.objects.all()
           # Check if the VFATs are in DB, add if not
@@ -53,7 +60,7 @@ def configure_db():
           if t_flag:
             pass
           else:
-            print "Update DB"
+            print "Update DB: adding new GEB"
             g = GEB(Type="Long",ChamberID = t_chamberID)
             g.save()
             for v in v_list:
@@ -62,7 +69,6 @@ def configure_db():
     
       t_flag = False
       t_boardID = "AMC-"+str(amcN)#hard code now, read from HW later when available
-      a_list = []
       amcs = AMC.objects.filter(BoardID = t_boardID)
       for amc in amcs:
         if g_list == list(amc.gebs.all()):
@@ -71,7 +77,7 @@ def configure_db():
       if t_flag:
         pass
       else:
-        print "Update DB"
+        print "Update DB: adding new AMC with Board ID %s" %(t_boardID)
         a = AMC(Type="GLIB",BoardID = t_boardID)
         a.save()
         for g in g_list:
@@ -91,5 +97,6 @@ def configure_db():
     newrun = Run(Name=m_filename, Type = "teststand", Number = str(nrs), Date = datetime.date.today(), Period = "2016T", Station = RUN_LOCATION)
     newrun.save()
     for a in a_list:
+      print "Adding to the run AMC %s" %(a.BoardID)
       newrun.amcs.add(a)
     sleep(2)

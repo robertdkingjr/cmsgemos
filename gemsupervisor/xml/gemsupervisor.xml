@@ -7,7 +7,7 @@
     <xc:Application class="gem::hw::glib::GLIBManager" id="30" instance="0" network="local">
       <properties xmlns="urn:xdaq-application:gem::hw::glib::GLIBManager"
 		  xsi:type="soapenc:Struct">
-	<AMCSlots       xsi:type="xsd:string">8,11</AMCSlots>
+	<AMCSlots       xsi:type="xsd:string">10</AMCSlots>
 	<ConnectionFile xsi:type="xsd:string">connections_ch.xml</ConnectionFile>
 	<AllGLIBsInfo xsi:type="soapenc:Array"  soapenc:arrayType="xsd:ur-type[12]">
           <!-- <GLIBInfo   xsi:type="soapenc:Struct" soapenc:position="10"> <!-\-  position must be slot-1  -\-> -->
@@ -26,17 +26,9 @@
             
           <!--   <sbitSource    xsi:type="xsd:integer">5</sbitSource> -->
           <!-- </GLIBInfo> -->
-          <GLIBInfo   xsi:type="soapenc:Struct" soapenc:position="10"> <!--  position must be slot-1  -->
+          <GLIBInfo   xsi:type="soapenc:Struct" soapenc:position="9"> <!--  position must be slot-1  -->
             <crateID  xsi:type="xsd:integer">1</crateID>
-            <slot     xsi:type="xsd:integer">11</slot>
-            <present  xsi:type="xsd:boolean">true</present>
-            <!--CardName xsi:type="xsd:string">gem.shelf01.ctp7-02</CardName-->
-            
-            <sbitSource    xsi:type="xsd:integer">5</sbitSource>
-          </GLIBInfo>
-          <GLIBInfo   xsi:type="soapenc:Struct" soapenc:position="7"> <!--  position must be slot-1  -->
-            <crateID  xsi:type="xsd:integer">1</crateID>
-            <slot     xsi:type="xsd:integer">8</slot>
+            <slot     xsi:type="xsd:integer">10</slot>
             <present  xsi:type="xsd:boolean">true</present>
             <!--CardName xsi:type="xsd:string">gem.shelf01.ctp7-02</CardName-->
             
@@ -72,19 +64,9 @@
 	<!--AMCSlots       xsi:type="xsd:string">10</AMCSlots-->
 	<ConnectionFile xsi:type="xsd:string">connections_ch.xml</ConnectionFile>
 	<AllOptoHybridsInfo xsi:type="soapenc:Array"  soapenc:arrayType="xsd:ur-type[24]">
-          <OptoHybridInfo   xsi:type="soapenc:Struct" soapenc:position="20"> <!-- position must be (slot-1)*2+link-1 -->
+          <OptoHybridInfo   xsi:type="soapenc:Struct" soapenc:position="18"> <!-- position must be (slot-1)*2+link-1 -->
             <crateID xsi:type="xsd:integer">1</crateID>
-            <slot    xsi:type="xsd:integer">11</slot>
-            <link    xsi:type="xsd:integer">0</link>
-            <present xsi:type="xsd:boolean">true</present>
-            <!--CardName xsi:type="xsd:string">gem.shelf01.ctp7-02.optohybrid02</CardName-->
-
-            <triggerSource xsi:type="xsd:integer">0</triggerSource>
-            <sbitSource    xsi:type="xsd:integer">5</sbitSource>
-          </OptoHybridInfo>
-          <OptoHybridInfo   xsi:type="soapenc:Struct" soapenc:position="14"> <!-- position must be (slot-1)*2+link-1 -->
-            <crateID xsi:type="xsd:integer">1</crateID>
-            <slot    xsi:type="xsd:integer">8</slot>
+            <slot    xsi:type="xsd:integer">10</slot>
             <link    xsi:type="xsd:integer">0</link>
             <present xsi:type="xsd:boolean">true</present>
             <!--CardName xsi:type="xsd:string">gem.shelf01.ctp7-02.optohybrid02</CardName-->
@@ -103,8 +85,8 @@
         <amc13ConfigParams xsi:type="soapenc:Struct">
           <ConnectionFile     xsi:type="xsd:string">connections_ch.xml</ConnectionFile>
 	  <CardName     xsi:type="xsd:string">gem.shelf01.amc13</CardName>
-          <AMCInputEnableList xsi:type="xsd:string">8,11</AMCInputEnableList>
-          <AMCIgnoreTTSList   xsi:type="xsd:string">0-10,12-15 </AMCIgnoreTTSList>
+          <AMCInputEnableList xsi:type="xsd:string">10</AMCInputEnableList>
+          <AMCIgnoreTTSList   xsi:type="xsd:string">0-9,11-15 </AMCIgnoreTTSList>
           
           <EnableDAQLink       xsi:type="xsd:boolean">true</EnableDAQLink>
           <EnableFakeData      xsi:type="xsd:boolean">false</EnableFakeData>
