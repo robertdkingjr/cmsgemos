@@ -3,7 +3,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "db.settings")
 import django
 django.setup()
 import datetime
-from time import sleep
+
+from time import sleep,gmtime,strftime
 from ldqm_db.models import *
 from ldqm_db.amcmanager import *
 
@@ -92,9 +93,11 @@ def configure_db():
     except ValueError as ve:
       nrs = u'%s'%(1)
     nrs = nrs.zfill(6)
-    t_date = str(datetime.date.today())
+    # t_date = str(datetime.date.today())
+    t_date = strftime("%Y-%m-%d",gmtime())
+
     m_filename = "run"+str(nrs)+""+"_teststand_"+RUN_LOCATION+"_"+t_date
-    newrun = Run(Name=m_filename, Type = "teststand", Number = str(nrs), Date = datetime.date.today(), Period = "2016T", Station = RUN_LOCATION)
+    newrun = Run(Name=m_filename, Type = "teststand", Number = str(nrs), Date = t_date, Period = "2016T", Station = RUN_LOCATION)
     newrun.save()
     for a in a_list:
       print "Adding to the run AMC %s" %(a.BoardID)
